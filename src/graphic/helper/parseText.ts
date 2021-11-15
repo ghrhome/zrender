@@ -360,6 +360,8 @@ export function parseRichText(text: string, style: TextStyleProps) {
         line.width = lineWidth;
         line.lineHeight = lineHeight;
         calculatedHeight += lineHeight;
+        if (style.text.indexOf('Appl') === 0)
+        console.log(lineWidth)
         calculatedWidth = Math.max(calculatedWidth, lineWidth);
     }
     // Calculate layout info of tokens.
@@ -487,7 +489,9 @@ export function parseRichText(text: string, style: TextStyleProps) {
         // Should not base on outerWidth, because token can not be placed out of padding.
         token.width = parseInt(percentWidth, 10) / 100 * contentBlock.width;
     }
-
+if (style.text.indexOf('Apple') == 0) {
+    console.log(contentBlock)
+}
     return contentBlock;
 }
 
@@ -677,18 +681,15 @@ function wrapText(
                     accumWidth = currentWordWidth;
                 }
                 else {
-                    // Append lastWord if have
-                    if (currentWord) {
-                        line += currentWord;
-                        accumWidth += currentWordWidth;
-                        currentWord = '';
-                        currentWordWidth = 0;
-                    }
+                    /**
+                     * If the currentWord is added, it will be too long.
+                     * So we don't add currentWord to this line but the next
+                     * line.
+                     */
                     lines.push(line);
-                    linesWidths.push(accumWidth);
-
-                    line = ch;
-                    accumWidth = chWidth;
+                    linesWidths.push(accumWidth - currentWordWidth);
+                    line = currentWord;
+                    accumWidth = currentWordWidth;
                 }
             }
 
