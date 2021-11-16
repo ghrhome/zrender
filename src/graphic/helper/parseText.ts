@@ -617,6 +617,9 @@ function wrapText(
     let currentWord = '';
     let currentWordWidth = 0;
     let accumWidth = 0;
+    if (text.indexOf('Adminis') === 0) {
+        console.log(text, lineWidth)
+    }
 
     for (let i = 0; i < text.length; i++) {
 
@@ -688,8 +691,10 @@ function wrapText(
                      */
                     lines.push(line);
                     linesWidths.push(accumWidth - currentWordWidth);
-                    line = currentWord;
-                    accumWidth = currentWordWidth;
+                    line = currentWord + ch;
+                    accumWidth = currentWordWidth + chWidth;
+                    currentWord = '';
+                    currentWordWidth = 0;
                 }
             }
 
