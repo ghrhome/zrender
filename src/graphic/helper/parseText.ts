@@ -360,8 +360,6 @@ export function parseRichText(text: string, style: TextStyleProps) {
         line.width = lineWidth;
         line.lineHeight = lineHeight;
         calculatedHeight += lineHeight;
-        if (style.text.indexOf('Appl') === 0)
-        console.log(lineWidth)
         calculatedWidth = Math.max(calculatedWidth, lineWidth);
     }
     // Calculate layout info of tokens.
@@ -489,9 +487,6 @@ export function parseRichText(text: string, style: TextStyleProps) {
         // Should not base on outerWidth, because token can not be placed out of padding.
         token.width = parseInt(percentWidth, 10) / 100 * contentBlock.width;
     }
-if (style.text.indexOf('Apple') == 0) {
-    console.log(contentBlock)
-}
     return contentBlock;
 }
 
@@ -617,9 +612,6 @@ function wrapText(
     let currentWord = '';
     let currentWordWidth = 0;
     let accumWidth = 0;
-    if (text.indexOf('Adminis') === 0) {
-        console.log(text, lineWidth)
-    }
 
     for (let i = 0; i < text.length; i++) {
 
